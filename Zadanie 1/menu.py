@@ -25,25 +25,26 @@ def choose():
     print("[0] Wyjdź")
     func = int(input())
 
-    while(func > 6 or func < 0):
+    while func > 6 or func < 0:
         print("Wybrałeś złą funkcję, spróbuj jeszcze raz")
         func = int(input())
 
-    if(func == 0): return
+    if func == 0:
+        quit()
 
     print("Wybierz warunek stopu:")
     print("[1] Dokładność")
     print("[2] Liczba iteracji")
     stop = int(input())
 
-    while(stop < 1 or stop > 2):
+    while stop < 1 or stop > 2:
         print("Wybrałeś zły warunek stopu, spróbuj jeszcze raz")
         stop = int(input())
 
-    if(stop == 1):
+    if stop == 1:
         print("Podaj dokladnosc z ktora chcesz obliczyc rozwiazanie")
         foo = float(input())
-    elif(stop == 2):
+    elif stop == 2:
         print("Podaj liczbe iteracji")
         foo = int(input())
 
