@@ -11,7 +11,7 @@ def polynominal(x):
 
 
 def cos(number):
-    return math.sin(number)
+    return math.cos(number)
 
 
 def exponential(number):
@@ -59,8 +59,8 @@ def bisection_method(function, stop_condition_number, stop_condition, a, b):
     print("Metoda bisekcji: ")
     # dokładność
     if stop_condition_number == 1:
-        while abs(b - a) >= stop_condition:
-            x = (a + b) / 2
+        x = (a + b) / 2
+        while abs(function(x)) >= stop_condition:
             if function(x) == 0:
                 return x
             print("X:", x, "| function: ", function(x))
@@ -71,6 +71,7 @@ def bisection_method(function, stop_condition_number, stop_condition, a, b):
                 b = x
             elif function(x) * function(b) < 0:
                 a = x
+            x = (a + b) / 2
         print("ABS: ", abs(b-a), "a, b: ", a, b)
     # liczba iteracji
     elif stop_condition_number == 2:
@@ -87,4 +88,18 @@ def bisection_method(function, stop_condition_number, stop_condition, a, b):
             elif function(x) * function(b) < 0:
                 a = x
         print("ABS: ", abs(b - a), "a, b: ", a, b)
+    return results
+
+
+def newton_method(function, funcderiv, stop_condition_number, stop_condition_type, x):
+    results = []
+
+    # dokładność
+    if (stop_condition_number == 1):
+        return 0
+    # liczba iteracji
+    elif (stop_condition_number == 2):
+        for iter in range(1, stop_condition_type):
+            i = x - (function(x)/funcderiv(x))
+
     return results
