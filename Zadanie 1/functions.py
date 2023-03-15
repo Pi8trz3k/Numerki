@@ -3,13 +3,15 @@ import math
 
 
 def polynominal(x):
-    coefficents = [2, 5, 2]
-    # coefficents = [-3,-3,1,1]
+    # coefficents = [2, 5, 2]
+    # coefficents = [-100,10,0,1]
+    coefficents = [-3, 3, 0, 4]
+    # coefficents = [-1, -1, 1]
     return horner.horner(coefficents, len(coefficents), x)
 
 
 def cos(number):
-    return math.cos(number)
+    return math.sin(number)
 
 
 def exponential(number):
@@ -56,29 +58,33 @@ def bisection_method(function, stop_condition_number, stop_condition, a, b):
     results = []
     print("Metoda bisekcji: ")
     # dokładność
-    if(stop_condition_number == 1):
-        while not(abs(b - a) < stop_condition):
+    if stop_condition_number == 1:
+        while abs(b - a) >= stop_condition:
             x = (a + b) / 2
+            if function(x) == 0:
+                return x
+            print("X:", x, "| function: ", function(x))
+            if function(a) * function(b) > 0:
+                print("Zły przedział")
+                quit()
+            elif function(x) * function(a) < 0:
+                b = x
+            elif function(x) * function(b) < 0:
+                a = x
+        print("ABS: ", abs(b-a), "a, b: ", a, b)
+    # liczba iteracji
+    elif stop_condition_number == 2:
+        for _ in range(1, stop_condition):
+            x = (a + b) / 2.0
             if function(x) == 0:
                 results.append(x)
             print("X:", x, "| function: ", function(x))
-            if function(x) * function(a) < 0:
+            if function(a) * function(b) > 0:
+                print("Zły przedział")
+                quit()
+            elif function(x) * function(a) < 0:
                 b = x
-            else:
+            elif function(x) * function(b) < 0:
                 a = x
-    #liczba iteracji
-    elif (stop_condition_number == 2):
-        for iter in range(1, stop_condition):
-            x = (a + b) / 2
-            if function(x) == 0:
-                results.append(x)
-            print("X:", x, "| function: ", function(x))
-            if function(x) * function(a) < 0:
-                b = x
-            else:
-                a = x
+        print("ABS: ", abs(b - a), "a, b: ", a, b)
     return results
-
-
-def newton_method():
-    return 0
