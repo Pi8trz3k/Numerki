@@ -2,28 +2,49 @@ import horner
 import math
 
 
-def polynominal(x):
+def polynominal(number):
     # coefficents = [2, 5, 2]
     # coefficents = [-100,10,0,1]
+    # -3 + 3x + 4x^3
     coefficents = [-3, 3, 0, 4]
     # coefficents = [-1, -1, 1]
-    return horner.horner(coefficents, len(coefficents), x)
+    return horner.horner(coefficents, len(coefficents), number)
+
+
+def deriv_polynominal(number):
+    return 3 + 12 * (number ** 2)
 
 
 def cos(number):
     return math.cos(number)
 
 
+def deriv_cos(number):
+    return -1 * math.sin(number)
+
+
 def exponential(number):
     return 2 ** number
+
+
+def deriv_exponential(number):
+    return (2 ** number) * math.log(2, math.e)
 
 
 def polynominal_cos(number):
     return polynominal(cos(number))
 
 
-def polynmoinal_exponential(number):
+def deriv_polynominal_cos(number):
+    return -6 * math.sin(number)
+
+
+def polynominal_exponential(number):
     return polynominal(exponential(number))
+
+
+def deriv_polynominal_exponential(number):
+    return 3 * (2 ** number + 2 ** (3 * number + 2)) * math.log(2, math.e)
 
 
 def choice(func_number, stop_condition_number, stop_condition, a, b):
@@ -36,7 +57,7 @@ def choice(func_number, stop_condition_number, stop_condition, a, b):
         #     return 0
         case 1:
             bisection = bisection_method(polynominal, stop_condition_number, stop_condition, a, b)
-
+            # newton = newton_method(polynominal, deriv_polynominal, stop_condition_number, stop_condition, )
             return bisection
         case 2:
             bisection = bisection_method(cos, stop_condition_number, stop_condition, a, b)
@@ -48,7 +69,7 @@ def choice(func_number, stop_condition_number, stop_condition, a, b):
             bisection = bisection_method(polynominal_cos, stop_condition_number, stop_condition, a, b)
             return bisection
         case 5:
-            bisection = bisection_method(polynmoinal_exponential, stop_condition_number, stop_condition, a, b)
+            bisection = bisection_method(polynominal_exponential, stop_condition_number, stop_condition, a, b)
             return bisection
         case _:
             return "Cos sie popsulo"
@@ -78,7 +99,7 @@ def bisection_method(function, stop_condition_number, stop_condition, a, b):
         for _ in range(1, stop_condition):
             x = (a + b) / 2.0
             if function(x) == 0:
-                results.append(x)
+                return x
             print("X:", x, "| function: ", function(x))
             if function(a) * function(b) > 0:
                 print("Zły przedział")
