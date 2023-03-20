@@ -99,6 +99,8 @@ def get_drawing(numbers, func, a, b):
     x = np.linspace(a, b)
     y = func(x)
     plt.plot(x, y)
+    plt.scatter(numbers[0], func(numbers[0]), edgecolors="red")
+    plt.scatter(numbers[1], func(numbers[1]), edgecolors="green")
     plt.grid()
     # plt.plot(x, y)
     plt.show()
