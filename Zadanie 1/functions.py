@@ -77,15 +77,16 @@ def choice(func_number, stop_condition_number, stop_condition, a, b, newton_gues
 
 
 def bisection_method(function, stop_condition_number, stop_condition, a, b):
-    results = []
     print("Metoda bisekcji: ")
+
     # dokładność
     if stop_condition_number == 1:
         x = (a + b) / 2
+        print("X:", x, "| function: ", function(x))
         while abs(function(x)) >= stop_condition:
             if function(x) == 0:
                 return x
-            print("X:", x, "| function: ", function(x))
+            # print("X:", x, "| function: ", function(x))
             if function(a) * function(b) > 0:
                 print("Zły przedział")
                 quit()
@@ -94,6 +95,8 @@ def bisection_method(function, stop_condition_number, stop_condition, a, b):
             elif function(x) * function(b) < 0:
                 a = x
             x = (a + b) / 2
+            print("X:", x, "| function: ", function(x))
+
         print("ABS: ", abs(b-a), "a, b: ", a, b)
     # liczba iteracji
     elif stop_condition_number == 2:
@@ -110,20 +113,22 @@ def bisection_method(function, stop_condition_number, stop_condition, a, b):
             elif function(x) * function(b) < 0:
                 a = x
         print("ABS: ", abs(b - a), "a, b: ", a, b)
+
     return x
 
 
-def newton_method(function, funcderiv, stop_condition_number, stop_condition_type, x):
+def newton_method(function, funcderiv, stop_condition_number, stop_condition_type, user_guess):
     results = []
     print("Metoda Newtona:")
     # dokładność
-    if (stop_condition_number == 1):
-        while abs(function(x)) > stop_condition_type:
+    x = user_guess
+    if stop_condition_number == 1:
+        while abs(function(x)) >= stop_condition_type:
             xi = x - (function(x)/funcderiv(x))
             x = xi
-            print("newton x: ", xi)
+            print("newton x: ", x)
     # liczba iteracji
-    elif (stop_condition_number == 2):
+    elif stop_condition_number == 2:
         for i in range(0, stop_condition_type):
             xi = x - (function(x)/funcderiv(x))
             x = xi
