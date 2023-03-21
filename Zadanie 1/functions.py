@@ -145,10 +145,6 @@ def newton_method(function, first_funcderiv, second_funcderiv, stop_condition_nu
         print("Zły przedział")
         quit()
 
-    if first_funcderiv(a) * second_funcderiv(a) < 0 or first_funcderiv(b) * second_funcderiv(b) < 0:
-        print("Zły przedział")
-        quit()
-
     if function(a) * second_funcderiv(a) >= 0:
         x = a
     elif function(b) * second_funcderiv(b) >= 0:
