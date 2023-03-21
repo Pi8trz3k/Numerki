@@ -58,7 +58,7 @@ def get_guess():
 
 
 def draw(func_number, a, b):
-    poly = f.choice(mathematical_function, stop_condition_number, stop_condition, a, b, c)
+    poly = f.choice(mathematical_function, stop_condition_number, stop_condition, a, b)
     match func_number:
         case 1:
             print(poly[0], f.polynominal(poly[0]), poly[1], f.polynominal(poly[0]))
@@ -102,6 +102,6 @@ def get_drawing(numbers, func, a, b):
 mathematical_function, stop_condition_number, stop_condition = choose()
 
 a, b = get_interval()
-c = get_guess()
+# c = get_guess()
 
 draw(mathematical_function, a, b)
