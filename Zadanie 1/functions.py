@@ -3,11 +3,8 @@ import math
 
 
 def polynominal(number):
-    # coefficents = [2, 5, 2]
-    # coefficents = [-100,10,0,1]
     # -3 + 3x + 4x^3
     coefficents = [-3, 3, 0, 4]
-    # coefficents = [-1, -1, 1]
     return horner.horner(coefficents, len(coefficents), number)
 
 
@@ -82,8 +79,10 @@ def bisection_method(function, stop_condition_number, stop_condition, a, b):
     # dokładność
     if stop_condition_number == 1:
         x = (a + b) / 2
+        i = 0
         print("X:", x, "| function: ", function(x))
         while abs(function(x)) >= stop_condition:
+            i = i + 1
             if function(x) == 0:
                 return x
             # print("X:", x, "| function: ", function(x))
@@ -96,7 +95,7 @@ def bisection_method(function, stop_condition_number, stop_condition, a, b):
                 a = x
             x = (a + b) / 2
             print("X:", x, "| function: ", function(x))
-
+        print("Liczba iteracji metodą bisekcji: ", i)
         print("ABS: ", abs(b-a), "a, b: ", a, b)
     # liczba iteracji
     elif stop_condition_number == 2:
@@ -104,7 +103,6 @@ def bisection_method(function, stop_condition_number, stop_condition, a, b):
             x = (a + b) / 2.0
             if function(x) == 0:
                 return x
-            print("X:", x, "| function: ", function(x))
             if function(a) * function(b) > 0:
                 print("Zły przedział")
                 quit()
@@ -112,7 +110,9 @@ def bisection_method(function, stop_condition_number, stop_condition, a, b):
                 b = x
             elif function(x) * function(b) < 0:
                 a = x
-        print("ABS: ", abs(b - a), "a, b: ", a, b)
+            print("X:", x, "| function: ", function(x))
+
+        print("ABS: ", abs(b - a), ";a, b: ", a, b)
 
     return x
 
@@ -123,10 +123,13 @@ def newton_method(function, funcderiv, stop_condition_number, stop_condition_typ
     # dokładność
     x = user_guess
     if stop_condition_number == 1:
+        i = 0
         while abs(function(x)) >= stop_condition_type:
+            i = i + 1
             xi = x - (function(x)/funcderiv(x))
             x = xi
             print("newton x: ", x)
+        print("Liczba iteracji metodą Newtona:", i)
     # liczba iteracji
     elif stop_condition_number == 2:
         for i in range(0, stop_condition_type):
