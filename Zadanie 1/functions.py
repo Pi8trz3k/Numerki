@@ -29,7 +29,7 @@ def second_deriv_cos(number):
 
 
 def exponential(number):
-    return 2 ** number
+    return 2 ** number - 2
 
 
 def first_deriv_exponential(number):
@@ -114,7 +114,7 @@ def bisection_method(function, stop_condition_number, stop_condition, a, b):
                 b = x
             elif function(x) * function(b) < 0:
                 a = x
-            x = (a + b) / 2
+            x = (a + b) / 2.0
             print("X:", x, "| function: ", function(x))
         print("Liczba iteracji metodą bisekcji: ", i)
         print("ABS: ", abs(b - a), "a, b: ", a, b)
@@ -150,8 +150,6 @@ def newton_method(function, first_funcderiv, second_funcderiv, stop_condition_nu
     elif function(b) * second_funcderiv(b) >= 0:
         x = b
     else:
-        print("a: ", function(a) * second_funcderiv(a))
-        print("b: ", function(b) * second_funcderiv(b))
         x = 1
 
     # dokładność
