@@ -46,9 +46,30 @@ def make_diagonally_dominant(coefficients_array):
     return coefficients_array
 
 
-array = np.loadtxt("./coefficients.txt", dtype="int", delimiter=",")
+def gauss_seidel(A, b, x0, epsilon, max_iterations):
+    n = len(A)
+    x = x0.copy()
+
+    for i in range(max_iterations):
+        x_new = np.zeros(n)
+        for j in range(n):
+            s1 = np.dot(A[j, :j], x_new[:j])
+            s2 = np.dot(A[j, j + 1:], x[j + 1:])
+            x_new[j] = (b[j] - s1 - s2) / A[j, j]
+            print("x_new, iteracja j:", j, x_new)
+        if np.allclose(x, x_new, rtol=epsilon):
+            return x_new
+        x = x_new
+    return x
+
+
+array = np.loadtxt("./coefficients.txt", dtype="float", delimiter=",")
 coefficients = get_coefficients(array)
 constants = get_constants(array)
 
 print(make_diagonally_dominant(coefficients))
 print(constants)
+
+x0 = np.zeros(4)
+
+print(gauss_seidel(coefficients, constants, x0, 0.000001, 9))
