@@ -25,7 +25,11 @@ def stop_number_choose(stop_condition_number):
     return number_choice
 
 
-stop_condition = stop_condition_choose()
-stop_condition_number = stop_number_choose(stop_condition)
+
+# stop_condition_choice can be iterations or epsilon value
+stop_condition_choice = stop_condition_choose()
+
+# stop_condition_number is value of iterations or epsilon value
+stop_condition_number = stop_number_choose(stop_condition_choice)
 
 

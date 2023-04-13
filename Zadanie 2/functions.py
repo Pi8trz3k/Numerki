@@ -15,38 +15,29 @@ def is_diagonally_dominant(array):
 
 
 # returning array that don't contain result numbers(last numbers in every row is rejected)
-def get_array_without_results_numbers(array):
-    array_len = len(array)
-    coefficients = np.zeros((array_len, array_len))
+def get_coefficients(array_input):
+    array_len = len(array_input)
+    coefficients_array = np.zeros((array_len, array_len))
 
     for i in range(array_len):
         for j in range(array_len):
-            coefficients[i][j] = array[i][j]
-    return coefficients
+            coefficients_array[i][j] = array_input[i][j]
+    return coefficients_array
 
 
-def make_diagonally_dominant(array):
-    array_len = len(array)
-    # array that have ones inside, used later
-    # zeros_array = np.ones(array_len)
-    #
-    # for i in range(array_len):
-    #     row_sum = np.sum(abs(array[i]))
-    #     diagonal_number = abs(array[i][i])
-    #     if diagonal_number < row_sum - diagonal_number:
-    #         zeros_array[i] = 0
-    #
-    # print(zeros_array)
+def make_diagonally_dominant(coefficients_array):
+    array_len = len(coefficients_array)
+
     for i in range(array_len):
-        row_sum = np.sum(np.abs(array[i]) - np.abs(array[i][i]))
-        if np.abs(array[i, i]) <= row_sum:
-            max_index = np.argmax(np.abs(array[i, :]))
-            array[[i, max_index], :] = array[[max_index, i], :]
-    return array
+        row_sum = np.sum(np.abs(coefficients_array[i]) - np.abs(coefficients_array[i][i]))
+        if np.abs(coefficients_array[i, i]) <= row_sum:
+            max_index = np.argmax(np.abs(coefficients_array[i, :]))
+            coefficients_array[[i, max_index], :] = coefficients_array[[max_index, i], :]
+    return coefficients_array
 
 
-coefficients_with_results = np.loadtxt("./coefficients.txt", dtype="int", delimiter=",")
-coefficients_only = get_array_without_results_numbers(coefficients_with_results)
-# print(is_diagonally_dominant(coefficients_only))
-# print(coefficients_only)
-print(make_diagonally_dominant(coefficients_only))
+array = np.loadtxt("./coefficients.txt", dtype="int", delimiter=",")
+coefficients = get_coefficients(array)
+
+
+print(make_diagonally_dominant(coefficients))
