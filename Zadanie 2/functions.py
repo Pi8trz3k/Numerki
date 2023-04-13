@@ -14,3 +14,15 @@ def is_diagonally_dominant(array):
     return True
 
 
+# returning array that don't contain result numbers(last numbers in every row is rejected)
+def get_array_without_results_numbers(array):
+    array_len = len(array)
+    coefficients = np.zeros((array_len, array_len))
+
+    for i in range(array_len):
+        for j in range(array_len):
+            coefficients[i][j] = array[i][j]
+    return coefficients
+
+
+
