@@ -2,12 +2,12 @@ import numpy as np
 
 
 # checking if matrix is diagonally dominant
-def is_diagonally_dominant(array):
-    tab_len = len(array)
+def is_diagonally_dominant(array_input):
+    tab_len = len(array_input)
     for i in range(tab_len):
-        row_sum = np.sum(abs(array[i]))
+        row_sum = np.sum(abs(array_input[i]))
         print(row_sum)
-        diagonal_number = abs(array[i][i])
+        diagonal_number = abs(array_input[i][i])
         row_sum_without_diagonal_number = row_sum - diagonal_number
         if diagonal_number <= row_sum_without_diagonal_number:
             return False
@@ -25,6 +25,16 @@ def get_coefficients(array_input):
     return coefficients_array
 
 
+# getting result of equations to array
+def get_constants(array_input):
+    array_len = len(array_input)
+    constat_array = np.zeros(array_len)
+
+    for i in range(array_len):
+        constat_array[i] = array_input[i][array_len]
+    return constat_array
+
+
 def make_diagonally_dominant(coefficients_array):
     array_len = len(coefficients_array)
 
@@ -38,6 +48,7 @@ def make_diagonally_dominant(coefficients_array):
 
 array = np.loadtxt("./coefficients.txt", dtype="int", delimiter=",")
 coefficients = get_coefficients(array)
-
+constants = get_constants(array)
 
 print(make_diagonally_dominant(coefficients))
+print(constants)
