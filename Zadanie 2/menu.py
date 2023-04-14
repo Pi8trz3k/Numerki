@@ -1,3 +1,4 @@
+import functions
 # choosing between number of iterations and accuracy
 def stop_condition_choose():
     print("Wybierz warunek stopu: ")
@@ -14,16 +15,15 @@ def stop_condition_choose():
 
 
 # choosing number of iterations or accuracy, need number with chosen stop condition -> stop_condition_choose()
-def stop_number_choose(stop_condition_number):
-    if stop_condition_number == 1:
+def stop_number_choose(choice):
+    if choice == 1:
         print("Podaj liczbe iteracji:")
         number_choice = int(input())
-    elif stop_condition_number == 2:
+    elif choice == 2:
         print("Podaj dokladnosc:")
         number_choice = float(input())
 
     return number_choice
-
 
 
 # stop_condition_choice can be iterations or epsilon value
@@ -32,4 +32,4 @@ stop_condition_choice = stop_condition_choose()
 # stop_condition_number is value of iterations or epsilon value
 stop_condition_number = stop_number_choose(stop_condition_choice)
 
-
+# print(functions.gauss_seidel(stop_condition_choice, stop_condition_number))
