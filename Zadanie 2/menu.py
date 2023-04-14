@@ -32,4 +32,4 @@ stop_condition_choice = stop_condition_choose()
 # stop_condition_number is value of iterations or epsilon value
 stop_condition_number = stop_number_choose(stop_condition_choice)
 
-# print(functions.gauss_seidel(stop_condition_choice, stop_condition_number))
+print(functions.gauss_seidl(stop_condition_choice, stop_condition_number))

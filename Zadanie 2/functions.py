@@ -38,6 +38,7 @@ def get_constants(array_input):
 
 def make_diagonally_dominant(coefficients_array, results):
     array_len = len(coefficients_array)
+    print("Przekształcam macierz oraz tablice wyrazów wolnych")
     for i in range(array_len):
         row_sum = np.sum(np.abs(coefficients_array[i]) - np.abs(coefficients_array[i][i]))
         if np.abs(coefficients_array[i, i]) <= row_sum:
@@ -82,7 +83,7 @@ def get_over_diagonal(array_input):
     return return_array
 
 
-def gauss_siedl(max_iterations):
+def gauss_seidl(choice, number):
     array = np.loadtxt("./coefficients.txt", dtype="float", delimiter=",", encoding="utf-8")
     coefficients = get_coefficients(array)
     constants = get_constants(array)
@@ -108,18 +109,34 @@ def gauss_siedl(max_iterations):
 
     x_new = np.zeros(array_len)
 
-    for i in range(max_iterations):
+    match choice:
+        # iterations
+        case 1:
+            for i in range(number):
 
-        for k in range(len(db)):
-            dl_numbers = 0
-            du_numbers = 0
-            for col in range(array_len):
-                dl_numbers = dl_numbers + (-1 * dl[k][col] * x[col])
-                du_numbers = du_numbers + (-1 * du[k][col] * x_new[col])
-            x_new[k] = (db[k] + dl_numbers + du_numbers)
-            x = x_new
+                for k in range(len(db)):
+                    dl_numbers = 0
+                    du_numbers = 0
+                    for col in range(array_len):
+                        dl_numbers = dl_numbers + (-1 * dl[k][col] * x[col])
+                        du_numbers = du_numbers + (-1 * du[k][col] * x_new[col])
+                    x_new[k] = (db[k] + dl_numbers + du_numbers)
+                    x = x_new.copy()
+        # epsilon
+        case 2:
+            diff = number + 1
+            while diff > number:
+                for k in range(array_len):
+                    dl_numbers = 0
+                    du_numbers = 0
+                    for col in range(array_len):
+                        dl_numbers = dl_numbers + (-1 * dl[k][col] * x[col])
+                        du_numbers = du_numbers + (-1 * du[k][col] * x_new[col])
+                    x_new[k] = (db[k] + dl_numbers + du_numbers)
+                for i in range(array_len):
+                    foo = abs(x_new[i] - x[i])
+                    if foo < diff:
+                        diff = foo
+                x = x_new.copy()
 
     return x
-
-
-print(gauss_siedl(9))
