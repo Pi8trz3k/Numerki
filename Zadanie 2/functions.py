@@ -3,16 +3,19 @@ import numpy as np
 
 # checking if matrix is diagonally dominant
 def is_diagonally_dominant(array_input):
-    tab_len = len(array_input) - 1
+    tab_len = len(array_input)
+    one_row = False
+    print("Sprawdzam czy macierz jest dominujaca")
     for i in range(tab_len):
         row_sum = np.sum(abs(array_input[i]))
-        # print(row_sum)
         diagonal_number = abs(array_input[i][i])
         row_sum_without_diagonal_number = row_sum - diagonal_number
-        if diagonal_number <= row_sum_without_diagonal_number:
-            print("Macierz nie jest dominujaca przekatniowo")
+        if diagonal_number > row_sum_without_diagonal_number:
+            one_row = True
+        if diagonal_number < row_sum_without_diagonal_number:
+            print("W wierszu", i + 1, " wartosc na przekatnej jest mniejsza od sumy reszty wspolczynnikow")
             return False
-    return True
+    return one_row
 
 
 # returning array that don't contain result numbers(last numbers in every row is rejected)
@@ -92,8 +95,8 @@ def gauss_seidl(choice, number):
         coefficients, constants = make_diagonally_dominant(coefficients, constants)
         if not (is_diagonally_dominant(coefficients)):
             print(coefficients)
-            print("Macierz nie jest dominująca przekątniowo, program zostaje zakonczony")
-            quit()
+            print("Macierz nie spełnia warunków zbieżności, program zostaje zakonczony")
+            # quit()
 
     array_len = len(coefficients)
 
@@ -125,10 +128,12 @@ def gauss_seidl(choice, number):
         # epsilon
         case 2:
             diff = number + 1
-            while diff > number:
+            counter = 0
+            while diff > number and counter < 15:
+                counter = counter + 1
                 for k in range(array_len):
-                    dl_numbers = 0
-                    du_numbers = 0
+                    dl_numbers = 0.0
+                    du_numbers = 0.0
                     for col in range(array_len):
                         dl_numbers = dl_numbers + (-1 * dl[k][col] * x[col])
                         du_numbers = du_numbers + (-1 * du[k][col] * x_new[col])
@@ -137,6 +142,7 @@ def gauss_seidl(choice, number):
                     foo = abs(x_new[i] - x[i])
                     if foo < diff:
                         diff = foo
+
                 x = x_new.copy()
 
     return x
