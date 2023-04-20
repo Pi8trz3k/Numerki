@@ -128,9 +128,7 @@ def gauss_seidl(choice, number):
         # epsilon
         case 2:
             diff = number + 1
-            counter = 0
-            while diff > number and counter < 15:
-                counter = counter + 1
+            while diff > number:
                 for k in range(array_len):
                     dl_numbers = 0.0
                     du_numbers = 0.0
