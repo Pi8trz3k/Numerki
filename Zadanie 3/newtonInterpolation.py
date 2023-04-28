@@ -9,3 +9,12 @@ def equidistant_nods(a_interval_beg_point, b_interval_end_point, number_of_point
 
     return x
 
+
+
+
+def getData():
+    array = np.loadtxt("./data.txt", dtype="float", delimiter=",", encoding="utf-8")
+    return array
+
+
+newton_interpolation()
