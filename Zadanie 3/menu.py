@@ -1,8 +1,9 @@
 import math_functions as f
-import newtonInterpolation
+import newtonInterpolation as nI
+import draw
 
 
-def show():
+def choose_function():
     print("1. Wielomian        -3 + 3x + 4x^3")
     print("2. Liniowa          3x - 5")
     print("3. Trygonometryczna cos(x - 0.1) + 2")
@@ -10,37 +11,45 @@ def show():
     print("5. Złożenie f4(f3)  |cos(x - 0.1) + 2 - 1|")
     print("6. Złożenie f2(f4)  3(|x - 1|)- 5")
     print("7. Złożenie f1(f2)  -3 + 3 * ( 3x - 5 ) + 4( 3x - 5)^3")
-
-
-def functions(factor):
-    choice = 0
-    show()
+    print("Podaj swoj wybor: ")
+    choice = int(input())
     while choice > 7 or choice < 1:
-        print("Podaj swoj wybor: ")
+        print("Podałeś zły wybór, spróbuj jeszcze raz: ")
         choice = int(input())
-
-    match choice:
-        case 1:
-            return f.polynominal(factor)
-        case 2:
-            return f.linear(factor)
-        case 3:
-            return f.cos(factor)
-        case 4:
-            return f.modulus(factor)
-        case 5:
-            return f.modulus_cos(factor)
-        case 6:
-            return f.linear_modulus(factor)
-        case 7:
-            return f.polynominal_linear(factor)
-        case _:
-            print("Cos jest nie tak")
+    return choice
 
 
 def get_nodes():
-    return int(input("Podaj liczbę punktów: "))
+    choice = int(input("Podaj liczbę punktów: "))
+    while choice < 1:
+        print("Podaj większą liczbę węzłów")
+        choice = int(input("Podaj liczbę punktów: "))
+    return choice
 
 
+def get_interval():
+    start = float(input("Podaj początek przedziału: "))
+    end = float(input("Podaj koniec przedziału: "))
+    while end < start:
+        print("Podałeś zły przedziały, spróbuj jeszcze raz: ")
+        start = float(input("Podaj początek przedziału: "))
+        end = float(input("Podaj koniec przedziału: "))
+
+    return start, end
+
+
+chosen_func = choose_function()
 nodes = get_nodes()
-functions(nodes)
+a, b = get_interval()
+h, fx, y = nI.equidistant_nods(a, b, nodes, chosen_func)
+
+calculated_x, calculated_y, real_x, real_y = [], [], [], []
+h /= 10
+while a <= b:
+    calculated_x.append(a)
+    calculated_y.append(nI.newton_interpolation(chosen_func, fx, a))
+    real_x.append(a)
+    real_y.append(f.functions(chosen_func, a))
+    a += h
+
+draw.graph(fx, y, calculated_x, calculated_y, real_x, real_y)

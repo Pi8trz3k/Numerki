@@ -36,3 +36,23 @@ def linear_modulus(number):
 def polynominal_linear(number):
     # -3 + 3 * ( 3x - 5 ) + 4( 3x - 5)^3
     return polynominal(linear(number))
+
+
+def functions(func_number, factor):
+    match func_number:
+        case 1:
+            return polynominal(factor)
+        case 2:
+            return linear(factor)
+        case 3:
+            return cos(factor)
+        case 4:
+            return modulus(factor)
+        case 5:
+            return modulus_cos(factor)
+        case 6:
+            return linear_modulus(factor)
+        case 7:
+            return polynominal_linear(factor)
+        case _:
+            print("Cos jest nie tak")
