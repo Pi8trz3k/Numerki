@@ -7,5 +7,5 @@ def graph(fx, fy, calculated_x, calculated_y, real_x, real_y):
     plt.plot(calculated_x, calculated_y, 'red')
     plt.plot(real_x, real_y, 'lime')
 
-    plt.legend(['nodes', 'calculated', 'real'])
+    plt.legend(['węzły', 'wielomian interpolacyjny', 'wykres funkcji f(x)'])
     plt.show()

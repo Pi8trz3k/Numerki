@@ -14,8 +14,8 @@ def linear(number):
 
 
 def cos(number):
-    # cos(x - 0.1) + 2
-    return math.cos(number - 0.1) + 2
+    # cos(x - 0.1)
+    return math.cos(number - 0.1)
 
 
 def modulus(number):
@@ -24,7 +24,7 @@ def modulus(number):
 
 
 def modulus_cos(number):
-    # |cos(x - 0.1) + 2 - 1|
+    # |cos(x - 0.1) -1 |
     return modulus(cos(number))
 
 
