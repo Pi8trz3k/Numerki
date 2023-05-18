@@ -40,21 +40,10 @@ def gaussa_legendre(a, b, func_choice, nodes):
             (0.5384693101056831, 0.47862867049936647), (0.906179845938664, 0.23692688505618908)]
     }
 
-    # # transformation to integral with interval [-1;1)
-    # c = -1
-    # d = 1
-    # alfa = (b-a) / (d-c)
-    # beta = ((a*d) - (b*c)) / (d - c)
-    # x = [beta, alfa]
-
     integral = 0
     for i in range(nodes):
-        print(i)
         xi, wi = coefficients[nodes][i]
-        print("xi: ", xi)
-        print("wi: ", wi)
-        xi_mapped = (b - a) * (xi + 1) / 2 + a
-        print("xi_mapped: ", xi_mapped)
+        xi_mapped = ((b - a) * xi + (a + b)) / 2
         integral += wi * choose(xi_mapped, func_choice)
 
     integral *= (b - a) / 2
