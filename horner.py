@@ -1,3 +1,4 @@
+# example [1, 1, 2] => 1 + x + 2x^2
 def horner(coefficients, len_table, x):
     i = len_table - 1
     result = coefficients[i]
