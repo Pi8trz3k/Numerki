@@ -1,10 +1,10 @@
 def get_data_from_user():
     print("Wybierz funkcję")
     print("1. 8x + 3")
-    print("2. sin(x) - 2")
-    print("3. 1 + 1x -2x^2")
+    print("2. sin(x) - 2cos(x - 5)")
+    print("3. 1 + x -2x^2")
     print("4. |x - 5|")
-    print("5. x / (1 + x)")
+    print("5. cos(x) / x")
 
     chosen_func = int(input("Podaj numer funkcji: "))
     while chosen_func < 1 or chosen_func > 5:
