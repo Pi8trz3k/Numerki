@@ -6,7 +6,7 @@ def choose(x, choice):
     if choice == 1:
         return 8 * x + 3
     elif choice == 2:
-        return np.sin(x)
+        return np.sin(15*x)
     elif choice == 3:
         coef = [12, 4, -1]
         return h.horner(coef, len(coef), x)
