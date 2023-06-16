@@ -1,9 +1,9 @@
 def get_functions():
     print("Wybierz aproksymowana funkcje: ")
     print("1. 8 * x + 3" )
-    print("2. sin(15 * x)")
+    print("2. sin(x)")
     print("3. 12 + 4 * x - x^2")
-    print("4. |x - 5|")
+    print("4. |2x|")
     print("5. 8 * sin(15 * x) + 3")
     print("6. |8 * x - 2|")
 
